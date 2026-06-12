@@ -6,13 +6,13 @@
         {{ timeLeft }}s
     </div>
     <br>
-    <img v-show="!isplaying" @click="startGame" src="/startbutton.png" alt="Image"  style="width: 70px; height: auto; margin-top: 20px;">   
-    <div v-show="isplaying" v-for= "item in items" :key = "item.name" :style = "{ position: 'absolute', left: item.x + 'px', top: item.y + 'px' }">
-        <img :src="`/${item.name}.png`" alt="Image" style="width: 40px; height: auto;">
+    <img v-show="!isplaying" @click="startGame" :src="`${base}startbutton.png`" alt="Image" style="width: 70px; height: auto; margin-top: 20px;">
+    <div v-show="isplaying" v-for="item in items" :key="item.name" :style="{ position: 'absolute', left: item.x + 'px', top: item.y + 'px' }">
+        <img :src="`${base}${item.name}.png`" alt="Image" style="width: 40px; height: auto;">
     </div>
-    <img v-show="isCounting" :src="`/count${countFrame}.png`"  :style="{ width: '70px', height: '80px', position: 'absolute', top: '150px', left: '390px' }">   
-    <img v-show="isover" :src="`/timeover.png`"  :style="{ width: '270px', height: '150px', position: 'absolute', top: '150px', left: '300px' }">   
-    <img :src="`/player${playerFrame}.png`"  :style="{ width: widthX  + 'px', height: '92px', position: 'absolute', top: '372px', left: playerX + 'px', transform: playerDirection === 'right' ? 'scaleX(-1)' : 'scaleX(1)' }">   
+    <img v-show="isCounting" :src="`${base}count${countFrame}.png`" :style="{ width: '70px', height: '80px', position: 'absolute', top: '150px', left: '390px' }">
+    <img v-show="isover" :src="`${base}timeover.png`" :style="{ width: '270px', height: '150px', position: 'absolute', top: '150px', left: '300px' }">
+    <img :src="`${base}player${playerFrame}.png`" :style="{ width: widthX + 'px', height: '92px', position: 'absolute', top: '372px', left: playerX + 'px', transform: playerDirection === 'right' ? 'scaleX(-1)' : 'scaleX(1)' }">
 </template>
 
 <script lang="js">
@@ -24,6 +24,7 @@ export default defineComponent({
 
     data() {
         return {
+            base: import.meta.env.BASE_URL,
             intervals: [],
             isplaying: false,
             isCounting: false,
