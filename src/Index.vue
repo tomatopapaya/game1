@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div style="font-size: 30px; font-weight: bold;">Power by {{ $store.state.author }}</div>
     <div style="font-size: 30px; font-weight: bold;">Score : {{ $store.state.score  }}</div>
-    <div v-show="isplaying" style="position: absolute; top: 20px; right: 30px; font-size: 24px; font-weight: bold;">
+    <div v-show="isplaying" style="position: absolute; top: 20px; left: 770px; font-size: 24px; font-weight: bold;">
         {{ timeLeft }}s
     </div>
     <br>
