@@ -5,6 +5,12 @@
     <div v-show="isplaying" style="position: absolute; top: 20px; left: 770px; font-size: 24px; font-weight: bold;">
         {{ timeLeft }}s
     </div>
+    <div class="control-area">
+        <button class="control-btn left-btn" @pointerdown="startMoveByButton('left')" @pointerup="stopMoveByButton('left')" @pointerleave="stopMoveByButton('left')" @pointercancel="stopMoveByButton('left')">◀</button>
+    </div>
+    <div class="control-area" style="left: 740px;">
+        <button class="control-btn right-btn" @pointerdown="startMoveByButton('right')" @pointerup="stopMoveByButton('right')" @pointerleave="stopMoveByButton('right')" @pointercancel="stopMoveByButton('right')">▶</button>
+    </div>
     <br>
     <img v-show="!isplaying" @click="startGame" :src="`${base}startbutton.png`" alt="Image" style="width: 70px; height: auto; margin-top: 20px;">
     <div v-show="isplaying" v-for="item in items" :key="item.name" :style="{ position: 'absolute', left: item.x + 'px', top: item.y + 'px' }">
@@ -40,7 +46,8 @@ export default defineComponent({
             keysPressed: {},
             timeLeft: 30,
             timerInterval: null,
-            moveInterval: null
+            moveInterval: null,
+            buttonDirection: ''
         }
     },
 
@@ -94,6 +101,23 @@ export default defineComponent({
                 this.stopWalkAnimation()
                 this.stopMoving()
             }   
+        },
+
+        startMoveByButton(direction) {
+            if (!this.isplaying) return
+            this.buttonDirection = direction
+            this.playerDirection = direction
+            this.widthX = 75
+            this.startWalkAnimation()
+            this.startMoving()
+        },
+
+        stopMoveByButton(direction) {
+            if (this.buttonDirection !== direction) return
+            this.buttonDirection = ''
+            this.widthX = 60
+            this.stopWalkAnimation()
+            this.stopMoving()
         },
 
         async startGame() {
@@ -220,3 +244,32 @@ export default defineComponent({
     }
 })
 </script>
+
+<style scoped>
+.control-area {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 16px;
+    z-index: 5;
+}
+
+.control-btn {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    touch-action: none;
+    user-select: none;
+}
+
+.control-btn:active {
+    transform: scale(0.96);
+}
+</style>

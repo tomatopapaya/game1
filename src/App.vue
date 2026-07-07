@@ -17,6 +17,8 @@ export default {
 .app-wrapper {
   width: 820px;
   height: 485px;
+  position: relative;
+  overflow: hidden;
   background-image: url('/大楓樹.png'), url('/背景.png');
   background-size: 100% 100%;
   background-position: center;
