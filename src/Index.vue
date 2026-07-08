@@ -5,10 +5,10 @@
     <div v-show="isplaying" style="position: absolute; top: 20px; left: 770px; font-size: 24px; font-weight: bold;">
         {{ timeLeft }}s
     </div>
-    <div class="control-area">
+    <div class="control-area left-control-area">
         <button class="control-btn left-btn" @pointerdown="startMoveByButton('left')" @pointerup="stopMoveByButton('left')" @pointerleave="stopMoveByButton('left')" @pointercancel="stopMoveByButton('left')">◀</button>
     </div>
-    <div class="control-area" style="left: 740px;">
+    <div class="control-area right-control-area">
         <button class="control-btn right-btn" @pointerdown="startMoveByButton('right')" @pointerup="stopMoveByButton('right')" @pointerleave="stopMoveByButton('right')" @pointercancel="stopMoveByButton('right')">▶</button>
     </div>
     <br>
@@ -249,10 +249,17 @@ export default defineComponent({
 .control-area {
     position: absolute;
     bottom: 20px;
-    left: 20px;
     display: flex;
     gap: 16px;
     z-index: 5;
+}
+
+.left-control-area {
+    left: 20px;
+}
+
+.right-control-area {
+    right: 20px;
 }
 
 .control-btn {
